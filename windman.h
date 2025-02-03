@@ -9,6 +9,7 @@
 #include <X11/Xutil.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <vector>
 //g++ -o windman -lX11 windman.cpp
 
 
@@ -16,37 +17,40 @@ int argc =0;
 typedef enum RotationEnum { bottom_to_top, top_to_bottom } Rotation;
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
+class task;
+class Окна{
+Display *dpy = XOpenDisplay(0x0);
+	public:
+   	Окна();
 
-class D{
-  public:
-    D();
+	void откр();
 
-	void run();
-
-
+	std::vector<task> vt;
 void x_alt_tab(Rotation r, Display *dpy, Window *wins, unsigned int nwins);
 
-Display *dpy = XOpenDisplay(0x0);
+//Display *dpy = XOpenDisplay(0x0);
 XWindowAttributes attr;
 XButtonEvent start;
 XEvent ev;
 unsigned int nwins = 0;
 Window root, parent, *wins = 0;
 
+Display *getDisplay(){return dpy;}
+
 //thread terminal
 
 
 
-
 };
-/*
+
+
 class task{
-task(){lunch}
-~task(){kill}
-public:
+	public:
+task(){/*lunch*/}
+~task(){/*kill*/}
 };
+//std::vector<task> vt;
 
-*/
 
 
 

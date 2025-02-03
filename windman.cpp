@@ -9,11 +9,11 @@
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-class D;
+class Окна;
 
 
 
-D::D(){
+Окна::Окна(){
 
 //dpy = XOpenDisplay(0x0);
 
@@ -22,18 +22,12 @@ D::D(){
 
 
 
-         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F11")), Mod1Mask,
-                                             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
-         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F12")), Mod1Mask,
-                                             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
-         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F3")), Mod1Mask,
-                                             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
-         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F4")), Mod1Mask,
-                                             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
-         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F5")), Mod1Mask,
-                                             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
-         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F6")), Mod1Mask,
-                                             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
+         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F1")), AnyModifier,                                             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
+         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F2")), AnyModifier,                                             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
+         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F3")), AnyModifier,                                             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
+         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F4")), AnyModifier,                                             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
+         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F5")), AnyModifier,                                             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
+         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F6")), AnyModifier,                                            DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
 
 
          XGrabKey (dpy, XKeysymToKeycode(dpy,XK_Tab), Mod1Mask, DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
@@ -41,8 +35,7 @@ D::D(){
 
 
 
-         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F7")), Mod1Mask,
-                         DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
+         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F7")), AnyModifier,          DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
          XGrabButton(dpy, 1, Mod1Mask, DefaultRootWindow(dpy), True,
                        ButtonPressMask|ButtonReleaseMask|PointerMotionMask, GrabModeAsync, GrabModeAsync, None, None);
          XGrabButton(dpy, 3, Mod1Mask, DefaultRootWindow(dpy), True,
@@ -72,9 +65,37 @@ for(;;)
 
 //if (ev.xkey.keycode==XKeysymToKeycode(dpy, XStringToKeysym("F11"))) { }
 
-
-
+if (ev.xkey.keycode==68) {
+pid_t pid0 = fork();//create copy of current process
+if (pid0 == 0) {//if child
+const char *argv[] ={"vminus",NULL,NULL,NULL,NULL};
+execvp(argv[0], const_cast<char *const *>(argv));
+pid0=NULL;}
+}
 if (ev.xkey.keycode==69) {
+pid_t pid0 = fork();//create copy of current process
+if (pid0 == 0) {//if child
+const char *argv[] ={"vplus",NULL,NULL,NULL,NULL};
+execvp(argv[0], const_cast<char *const *>(argv));
+pid0=NULL;}
+}
+
+if (ev.xkey.keycode==67) {
+pid_t pid0 = fork();//create copy of current process
+if (pid0 == 0) {//if child
+const char *argv[] ={"vmute",NULL,NULL,NULL,NULL};
+execvp(argv[0], const_cast<char *const *>(argv));
+pid0=NULL;}
+}
+
+
+
+
+
+
+
+
+if (ev.xkey.keycode==70) {
 pid_t pid0 = fork();//create copy of current process
 if (pid0 == 0) {//if child
 const char *argv[] ={"st",NULL,NULL,NULL,NULL};
@@ -113,10 +134,10 @@ else if(ev.type == ButtonRelease)
 start.subwindow = None;
 }
 }
-void D::run(){}
+void Окна::откр(){}
 
 
-void D::x_alt_tab(Rotation r, Display *dpy, Window *wins, unsigned int nwins) {
+void Окна::x_alt_tab(Rotation r, Display *dpy, Window *wins, unsigned int nwins) {
       Window *viewables[nwins], *w = 0;
       unsigned int vc = 0;
 
@@ -150,12 +171,12 @@ void D::x_alt_tab(Rotation r, Display *dpy, Window *wins, unsigned int nwins) {
 
 
 
-int main(void) {
+int _main(void) {
 
 
-  D *d= new D();
+  Окна *шпингалет= new Окна();
 
-  d->run();
+  шпингалет->откр();
 
 }
 
